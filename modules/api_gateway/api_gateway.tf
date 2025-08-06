@@ -1,0 +1,120 @@
+resource "aws_apigatewayv2_api" "api" {
+  name = var.api_name
+  protocol_type = "HTTP"
+  body = <<EOF
+openapi: 3.0.1
+info:
+  title: Sushi API
+  version: 1.0.0
+  description: API for managing sushi restaurant operations
+paths:
+  /v1/menu:
+    get:
+      summary: Get the menu
+      responses:
+        '200':
+          description: Menu retrieved successfully
+      x-amazon-apigateway-integration:
+        uri: ${var.lambda_uri_menu}
+        httpMethod: POST
+        type: aws_proxy
+        payloadFormatVersion: 2.0
+  /v1/orders:
+    get:
+      summary: Get all orders
+      responses:
+        '200':
+          description: Orders retrieved successfully
+      x-amazon-apigateway-integration:
+        uri: ${var.lambda_uri_orders}
+        httpMethod: POST
+        type: aws_proxy
+        payloadFormatVersion: 2.0
+    put:
+      summary: Update an order
+      responses:
+        '200':
+          description: Order updated successfully
+      x-amazon-apigateway-integration:
+        uri: ${var.lambda_uri_orders}
+        httpMethod: POST
+        type: aws_proxy
+        payloadFormatVersion: 2.0
+    post:
+      summary: Create a new order
+      responses:
+        '200':
+          description: Order created successfully
+      x-amazon-apigateway-integration:
+        uri: ${var.lambda_uri_orders}
+        httpMethod: POST
+        type: aws_proxy
+        payloadFormatVersion: 2.0
+    delete:
+      summary: Delete an order
+      responses:
+        '200':
+          description: Order deleted successfully
+      x-amazon-apigateway-integration:
+        uri: ${var.lambda_uri_orders}
+        httpMethod: POST
+        type: aws_proxy
+        payloadFormatVersion: 2.0
+  /v1/users:
+    get:
+      summary: Get all users
+      responses:
+        '200':
+          description: Users retrieved successfully
+      x-amazon-apigateway-integration:
+        uri: ${var.lambda_uri_users}
+        httpMethod: POST
+        type: aws_proxy
+        payloadFormatVersion: 2.0
+    put:
+      summary: Update a user
+      responses:
+        '200':
+          description: User updated successfully
+      x-amazon-apigateway-integration:
+        uri: ${var.lambda_uri_users}
+        httpMethod: POST
+        type: aws_proxy
+        payloadFormatVersion: 2.0
+    post:
+      summary: Create a new user
+      responses:
+        '200':
+          description: User created successfully
+      x-amazon-apigateway-integration:
+        uri: ${var.lambda_uri_users}
+        httpMethod: POST
+        type: aws_proxy
+        payloadFormatVersion: 2.0
+    delete:
+      summary: Delete a user
+      responses:
+        '200':
+          description: User deleted successfully
+      x-amazon-apigateway-integration:
+        uri: ${var.lambda_uri_users}
+        httpMethod: POST
+        type: aws_proxy
+        payloadFormatVersion: 2.0
+EOF
+}
+
+resource "aws_apigatewayv2_deployment" "api_deployment" {
+  depends_on = [aws_apigatewayv2_api.api]
+  api_id = aws_apigatewayv2_api.api.id
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "aws_apigatewayv2_stage" "test_stage" {
+  deployment_id = aws_apigatewayv2_deployment.api_deployment.id
+  api_id        = aws_apigatewayv2_api.api.id
+  name         = "test"
+}
