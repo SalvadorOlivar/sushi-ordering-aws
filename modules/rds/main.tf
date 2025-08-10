@@ -29,10 +29,11 @@ resource "aws_security_group" "rds_sg" {
   vpc_id      = var.vpc_id
 
   ingress {
-    from_port   = var.db_port
-    to_port     = var.db_port
-    protocol    = "tcp"
-    cidr_blocks = ["10.0.0.0/16"]
+    from_port                = var.db_port
+    to_port                  = var.db_port
+    protocol                 = "tcp"
+    security_groups          = [var.lambda_sg_id]
+    description              = "Permite acceso solo desde Lambda SG"
   }
   egress {
     from_port   = 22

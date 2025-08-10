@@ -3,20 +3,23 @@ locals {
     menu = {
       function_name = "lambda_menu"
       runtime       = "python3.9"
-      filename      = "${path.module}/api/menu.zip"
+      source_dir    = "${path.module}/api/menu"
       handler       = "lambda_function.lambda_handler"
+      filename      = "${path.module}/api/menu/menu.zip"
     }
     orders = {
       function_name = "lambda_orders"
       runtime       = "java11"
-      filename      = "${path.module}/api/orders.zip"
+      source_dir    = "${path.module}/api/orders"
       handler       = "index.handler"
+      filename      = "${path.module}/api/orders/orders.zip"
     }
     users = {
       function_name = "lambda_users"
       runtime       = "nodejs22.x"
-      filename      = "${path.module}/api/users.zip"
+      source_dir    = "${path.module}/api/users"
       handler       = "main"
+      filename      = "${path.module}/api/users/users.zip"
     }
   }
 }

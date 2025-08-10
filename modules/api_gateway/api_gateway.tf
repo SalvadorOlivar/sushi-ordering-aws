@@ -1,6 +1,5 @@
-resource "aws_apigatewayv2_api" "api" {
+resource "aws_api_gateway_rest_api" "api" {
   name = var.api_name
-  protocol_type = "HTTP"
   body = <<EOF
 openapi: 3.0.1
 info:
@@ -17,6 +16,26 @@ paths:
       x-amazon-apigateway-integration:
         uri: ${var.lambda_uri_menu}
         httpMethod: POST
+        type: aws_proxy
+        payloadFormatVersion: 2.0
+    post:
+      summary: Create a new Menu Item
+      responses:
+        '200':
+          description: Menu item created successfully
+      x-amazon-apigateway-integration:
+        uri: ${var.lambda_uri_menu}
+        httpMethod: POST
+        type: aws_proxy
+        payloadFormatVersion: 2.0
+    delete:
+      summary: Delete a Menu Item
+      responses:
+        '200':
+          description: Menu item deleted successfully
+      x-amazon-apigateway-integration:
+        uri: ${var.lambda_uri_menu}
+        httpMethod: DELETE
         type: aws_proxy
         payloadFormatVersion: 2.0
   /v1/orders:
@@ -104,17 +123,17 @@ paths:
 EOF
 }
 
-resource "aws_apigatewayv2_deployment" "api_deployment" {
-  depends_on = [aws_apigatewayv2_api.api]
-  api_id = aws_apigatewayv2_api.api.id
+resource "aws_api_gateway_deployment" "api_deployment" {
+  depends_on = [aws_api_gateway_rest_api.api]
+  rest_api_id = aws_api_gateway_rest_api.api.id
 
   lifecycle {
     create_before_destroy = true
   }
 }
 
-resource "aws_apigatewayv2_stage" "test_stage" {
-  deployment_id = aws_apigatewayv2_deployment.api_deployment.id
-  api_id        = aws_apigatewayv2_api.api.id
-  name         = "test"
+resource "aws_api_gateway_stage" "test_stage" {
+  deployment_id = aws_api_gateway_deployment.api_deployment.id
+  rest_api_id   = aws_api_gateway_rest_api.api.id
+  stage_name    = "test"
 }

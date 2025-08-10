@@ -11,51 +11,16 @@ module "vpc" {
   enable_dns_support   = true
 }
 
-#### EC2 Instance
-# Clave pública SSH
-resource "aws_key_pair" "deployer" {
-  key_name   = "terraform-key"
-  public_key = file("keys/id_ed25519.pub")
+module "ec2" {
+  source           = "./modules/ec2"
+  key_name         = "terraform-key"
+  public_key_path  = "keys/id_ed25519.pub"
+  ami              = "ami-084a7d336e816906b"
+  instance_type    = "t2.micro"
+  subnet_id        = module.vpc.public_subnets[0]
+  instance_name    = "SushiTestInstance"
+  vpc_id           = module.vpc.vpc_id
 }
-
-resource "aws_instance" "test_instance" {
-  ami           = "ami-084a7d336e816906b"
-  instance_type = "t2.micro"
-  subnet_id     = module.vpc.public_subnets[0]
-  key_name      = aws_key_pair.deployer.key_name
-  vpc_security_group_ids = [aws_security_group.test_instance_sg.id]
-  tags = {
-    Name = "SushiTestInstance"
-  }
-}
-
-## Create a public ip and attach it to the instance
-resource "aws_eip" "test_instance_eip" {
-  instance = aws_instance.test_instance.id
-  domain   = "vpc"
-}
-
-resource "aws_security_group" "test_instance_sg" {
-  name        = "test_instance_sg"
-  description = "Security group for test instance"
-  vpc_id      = module.vpc.vpc_id
-
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-}
-
-#### EC2 Instance
 
 module "api_gateway" {
   source                     = "./modules/api_gateway"
@@ -76,6 +41,7 @@ module "rds" {
   db_port             = 3306
   vpc_id              = module.vpc.vpc_id
   subnet_ids          = module.vpc.private_subnets
+  lambda_sg_id        = module.lambda.lambda_sg_id
 }
 
 module "lambda" {
@@ -85,7 +51,6 @@ module "lambda" {
   db_password                  = "test_password"
   db_name                      = "sushi"
   api_endpoint_execution_arn   = module.api_gateway.api_endpoint_execution_arn
-
   subnet_ids                   = module.vpc.private_subnets
   vpc_id                       = module.vpc.vpc_id
   tags = {

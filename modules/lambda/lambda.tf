@@ -67,8 +67,10 @@ resource "aws_iam_role_policy" "lambda_rds_access" {
     Statement = [
       {
         Action = [
-          "rds:DescribeDBInstances",
-          "rds:Connect"
+          "rds:*",
+          "ec2:*",
+          "logs:*",
+          "secretsmanager:GetSecretValue"
         ]
         Effect   = "Allow"
         Resource = "*"

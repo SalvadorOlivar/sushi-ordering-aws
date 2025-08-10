@@ -19,6 +19,11 @@ variable "db_password" {
   sensitive   = true
 }
 
+variable "lambda_sg_id" {
+  description = "ID del security group de Lambda para permitir acceso en RDS"
+  type        = string
+}
+
 variable "db_instance_class" {
   description = "Tipo de instancia RDS (db.t3.micro para capa gratuita)"
   type        = string

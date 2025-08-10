@@ -1,25 +1,21 @@
-## Create gitignore for terraform
+# Terraform state
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
 
-# Ignore Terraform files
-*.tfstate   # Terraform state files
-*.tfstate.* # Backup Terraform state files
-*.tfvars    # Terraform variable files
-*.tfplan    # Terraform plan files
-.terraform/ # Terraform working directory
-.terraform.lock.hcl # Terraform lock file
-# Ignore Terraform plan output
+# Terraform plan files
 *.tfplan
-# Ignore Terraform workspace files
-.terraform.tfstate
-# Ignore Terraform module cache
-.terraform/modules/ # Terraform module cache
-# Ignore Terraform provider binaries
-.terraform/providers/ # Terraform provider binaries
-# Ignore Terraform CLI configuration files
-terraform.tfvars.json # JSON format variable files
-# Ignore Terraform workspace files
-.terraform/environment # Terraform environment files
-# Ignore Terraform local state files
-.terraform/local.tfstate # Local state files
-# Ignore Terraform backup files
-*.tfstate.backup # Backup state files
+
+# Terraform crash logs
+crash.log
+
+# Terraform override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Sensitive variable files
+*.tfvars
+*.tfvars.json
