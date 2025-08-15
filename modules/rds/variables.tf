@@ -24,6 +24,11 @@ variable "lambda_sg_id" {
   type        = string
 }
 
+variable "ec2_sg_id" {
+  description = "ID del security group de EC2 para permitir acceso en RDS"
+  type        = string
+}
+
 variable "db_instance_class" {
   description = "Tipo de instancia RDS (db.t3.micro para capa gratuita)"
   type        = string

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sushi Ordering Frontend</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Menú Sushi</h1>
+  <div id="menu-list"></div>
+  <h2>Agregar Plato</h2>
+  <form id="add-form">
+    <input type="text" id="nombre_plato" placeholder="Nombre del plato" required>
+    <input type="number" id="precio" placeholder="Precio" step="0.01" required>
+    <input type="text" id="descripcion" placeholder="Descripción">
+    <label><input type="checkbox" id="disponible" checked> Disponible</label>
+    <button type="submit">Agregar</button>
+  </form>
+  <script src="app.js"></script>
+</body>
+</html>

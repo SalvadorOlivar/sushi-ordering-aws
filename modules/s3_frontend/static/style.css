@@ -1,0 +1,8 @@
+body { font-family: Arial, sans-serif; margin: 2em; background: #f8f8f8; }
+h1 { color: #d35400; }
+#menu-list { margin-bottom: 2em; }
+.menu-item { background: #fff; padding: 1em; margin-bottom: 1em; border-radius: 5px; box-shadow: 0 2px 4px #0001; }
+.menu-item span { display: inline-block; min-width: 120px; }
+.menu-item button { background: #e74c3c; color: #fff; border: none; padding: 0.3em 1em; border-radius: 3px; cursor: pointer; }
+.menu-item button:hover { background: #c0392b; }
+form input, form button, form label { margin-right: 0.5em; }

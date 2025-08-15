@@ -1,3 +1,8 @@
+CORS_HEADERS = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Methods": "GET,POST,DELETE,OPTIONS"
+}
 import json
 import os
 import boto3
@@ -20,6 +25,12 @@ def lambda_handler(event, context):
             port=port
         )
         method = event.get("httpMethod", "GET")
+        if method == "OPTIONS":
+            return {
+                "statusCode": 200,
+                "headers": CORS_HEADERS,
+                "body": ""
+            }
         if method == "POST":
             body = event.get("body")
             if body:
@@ -36,11 +47,13 @@ def lambda_handler(event, context):
                     connection.commit()
                 return {
                     "statusCode": 201,
+                    "headers": CORS_HEADERS,
                     "body": json.dumps({"message": "Plato agregado exitosamente"})
                 }
             else:
                 return {
                     "statusCode": 400,
+                    "headers": CORS_HEADERS,
                     "body": json.dumps({"error": "Faltan datos en el body"})
                 }
         elif method == "DELETE":
@@ -57,16 +70,19 @@ def lambda_handler(event, context):
                         connection.commit()
                     return {
                         "statusCode": 200,
+                        "headers": CORS_HEADERS,
                         "body": json.dumps({"message": f"Plato con id {menu_id} eliminado exitosamente"})
                     }
                 else:
                     return {
                         "statusCode": 400,
+                        "headers": CORS_HEADERS,
                         "body": json.dumps({"error": "Falta el id en el body"})
                     }
             else:
                 return {
                     "statusCode": 400,
+                    "headers": CORS_HEADERS,
                     "body": json.dumps({"error": "Faltan datos en el body"})
                 }
         else:
@@ -76,11 +92,13 @@ def lambda_handler(event, context):
                 nombres = [row[0] for row in result]
             return {
                 "statusCode": 200,
+                "headers": CORS_HEADERS,
                 "body": json.dumps(nombres)
             }
     except Exception as e:
         return {
             "statusCode": 500,
+            "headers": CORS_HEADERS,
             "body": json.dumps({"error": str(e)})
         }
     

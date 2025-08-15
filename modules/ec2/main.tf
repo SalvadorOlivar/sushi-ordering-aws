@@ -12,6 +12,34 @@ resource "aws_instance" "test_instance" {
   tags = {
     Name = var.instance_name
   }
+  user_data = <<-EOF
+#!/bin/bash
+    # Esperar a que la instancia tenga red
+    sleep 15
+    # Instalar mysql client
+    sudo dnf install mariadb105 -y
+    # Variables de entorno (deben ser exportadas en el entorno EC2)
+    # Crear archivo ~/.my.cnf con los datos de conexión
+    cat > ~/.my.cnf <<MYCNF
+[mysql]
+user=test_user
+password=test_password
+host=sushi.cytyicikgrsm.us-east-1.rds.amazonaws.com
+MYCNF
+    chmod 0600 ~/.my.cnf
+    # Crear base de datos 'sushi' si no existe
+    mysql --defaults-file=~/.my.cnf -e "CREATE DATABASE IF NOT EXISTS sushi;"
+    # Crear tabla menu_sushi en la base de datos 'sushi'
+    mysql --defaults-file=~/.my.cnf sushi <<SQL
+CREATE TABLE IF NOT EXISTS menu_sushi (
+id INT AUTO_INCREMENT PRIMARY KEY,
+nombre_plato VARCHAR(100) NOT NULL,
+precio DECIMAL(10,2) NOT NULL,
+descripcion VARCHAR(255),
+disponible BOOLEAN DEFAULT TRUE
+);
+SQL
+  EOF
 }
 
 resource "aws_eip" "test_instance_eip" {

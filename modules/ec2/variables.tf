@@ -32,3 +32,23 @@ variable "vpc_id" {
   description = "ID del VPC para la instancia EC2"
   type        = string
 }
+
+variable "db_name" {
+  description = "Nombre de la base de datos"
+  type        = string
+}
+
+variable "db_username" {
+  description = "Nombre de usuario de la base de datos"
+  type        = string
+}
+
+variable "db_password" {
+  description = "Contraseña de la base de datos"
+  type        = string
+}
+
+variable "db_host" {
+  description = "Dirección del host de la base de datos"
+  type        = string
+}

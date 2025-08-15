@@ -1,3 +1,12 @@
+resource "random_id" "suffix" {
+  byte_length = 4
+}
+
+module "s3_frontend" {
+  source = "./modules/s3_frontend"
+  s3_frontend_bucket_name = "sushi-frontend-static-website-${random_id.suffix.hex}"
+}
+
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "6.0.1"
@@ -20,6 +29,11 @@ module "ec2" {
   subnet_id        = module.vpc.public_subnets[0]
   instance_name    = "SushiTestInstance"
   vpc_id           = module.vpc.vpc_id
+  db_host          = module.rds.sushi_db.address
+  db_name          = "sushi"
+  db_username      = "test_user"
+  db_password      = "test_password"
+
 }
 
 module "api_gateway" {
@@ -42,6 +56,7 @@ module "rds" {
   vpc_id              = module.vpc.vpc_id
   subnet_ids          = module.vpc.private_subnets
   lambda_sg_id        = module.lambda.lambda_sg_id
+  ec2_sg_id           = module.ec2.security_group_id
 }
 
 module "lambda" {

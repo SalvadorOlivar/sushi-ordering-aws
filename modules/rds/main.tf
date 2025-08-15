@@ -32,7 +32,7 @@ resource "aws_security_group" "rds_sg" {
     from_port                = var.db_port
     to_port                  = var.db_port
     protocol                 = "tcp"
-    security_groups          = [var.lambda_sg_id]
+    security_groups          = [var.lambda_sg_id , var.ec2_sg_id]
     description              = "Permite acceso solo desde Lambda SG"
   }
   egress {
