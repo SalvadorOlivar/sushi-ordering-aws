@@ -1,12 +1,13 @@
-CORS_HEADERS = {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "Content-Type",
-    "Access-Control-Allow-Methods": "GET,POST,DELETE,OPTIONS"
-}
 import json
 import os
 import boto3
 import pymysql
+
+CORS_HEADERS = {
+    "Access-Control-Allow-Origin": "http://sushi-frontend-static-website-65a11ec9.s3-website-us-east-1.amazonaws.com",
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Methods": "GET,POST,DELETE,OPTIONS"
+}
 
 # RDS settings
 port = 3306
@@ -87,13 +88,14 @@ def lambda_handler(event, context):
                 }
         else:
             with connection.cursor() as cursor:
-                cursor.execute('SELECT nombre_plato FROM menu_sushi;')
+                cursor.execute('SELECT id, nombre_plato FROM menu_sushi;')
                 result = cursor.fetchall()
-                nombres = [row[0] for row in result]
+                # result es una lista de tuplas (id, nombre_plato)
+                items = [{"id": row[0], "nombre_plato": row[1]} for row in result]
             return {
                 "statusCode": 200,
                 "headers": CORS_HEADERS,
-                "body": json.dumps(nombres)
+                "body": json.dumps(items)
             }
     except Exception as e:
         return {

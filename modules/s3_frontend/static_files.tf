@@ -12,4 +12,5 @@ resource "aws_s3_object" "static_files" {
     "css"  = "text/css",
     "js"   = "application/javascript"
   }, split(".", each.key)[length(split(".", each.key))-1], "application/octet-stream")
+  source_hash = filemd5("${path.module}/static/${each.key}")
 }

@@ -35,9 +35,37 @@ paths:
           description: Menu item deleted successfully
       x-amazon-apigateway-integration:
         uri: ${var.lambda_uri_menu}
-        httpMethod: DELETE
+        httpMethod: POST
         type: aws_proxy
         payloadFormatVersion: 2.0
+    options:
+      summary: CORS support
+      responses:
+        '200':
+          description: CORS support
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+      x-amazon-apigateway-integration:
+        type: mock
+        requestTemplates:
+          application/json: '{"statusCode": 200}'
+        responses:
+          default:
+            statusCode: '200'
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'GET,POST,DELETE,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+            responseTemplates:
+              application/json: ''
   /v1/orders:
     get:
       summary: Get all orders

@@ -49,7 +49,7 @@ module "rds" {
   db_name             = "sushi"
   db_username         = "test_user"
   db_password         = "test_password"
-  db_instance_class   = "db.t3.micro"
+  db_instance_class   = "db.t4g.micro"
   db_allocated_storage= 20
   db_engine           = "mysql"
   db_port             = 3306

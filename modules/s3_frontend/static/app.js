@@ -1,5 +1,5 @@
 // Cambia esta URL por la de tu API Gateway
-const API_URL = 'https://hruffpfu02.execute-api.us-east-1.amazonaws.com/test/v1/menu';
+const API_URL = 'https://j1qupm5h22.execute-api.us-east-1.amazonaws.com/test/v1/menu';
 
 function fetchMenu() {
   fetch(API_URL)
@@ -7,21 +7,20 @@ function fetchMenu() {
     .then(data => {
       const list = document.getElementById('menu-list');
       list.innerHTML = '';
-      data.forEach(nombre => {
+      data.forEach(item => {
         const div = document.createElement('div');
         div.className = 'menu-item';
-        div.innerHTML = `<span>${nombre}</span> <button onclick="deleteMenu('${nombre}')">Eliminar</button>`;
+        div.innerHTML = `<span>${item.nombre_plato}</span> <button onclick="deleteMenu('${item.id}')">Eliminar</button>`;
         list.appendChild(div);
       });
     });
 }
 
-function deleteMenu(nombre) {
-  // Aquí deberías obtener el id real del plato, este ejemplo asume que nombre es único
+function deleteMenu(id) {
   fetch(API_URL, {
     method: 'DELETE',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ id: nombre })
+    body: JSON.stringify({ id: id })
   }).then(() => fetchMenu());
 }
 
