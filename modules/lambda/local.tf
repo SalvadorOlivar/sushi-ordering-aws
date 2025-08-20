@@ -9,9 +9,9 @@ locals {
     }
     orders = {
       function_name = "lambda_orders"
-      runtime       = "java11"
+      runtime       = "provided.al2023"
       source_dir    = "${path.module}/api/orders"
-      handler       = "index.handler"
+      handler       = "main"
       filename      = "${path.module}/api/orders/orders.zip"
     }
     users = {

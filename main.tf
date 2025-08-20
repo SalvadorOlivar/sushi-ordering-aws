@@ -65,6 +65,7 @@ module "lambda" {
   db_user                      = "test_user"
   db_password                  = "test_password"
   db_name                      = "sushi"
+  s3_frontend_bucket_url       = module.s3_frontend.url
   api_endpoint_execution_arn   = module.api_gateway.api_endpoint_execution_arn
   subnet_ids                   = module.vpc.private_subnets
   vpc_id                       = module.vpc.vpc_id

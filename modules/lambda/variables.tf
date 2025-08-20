@@ -38,3 +38,8 @@ variable "vpc_id" {
   description = "ID del VPC donde se desplegarán los recursos"
   type        = string
 }
+
+variable "s3_frontend_bucket_url" {
+  description = "URL del bucket S3 para el frontend"
+  type        = string
+}

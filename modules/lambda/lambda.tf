@@ -22,6 +22,7 @@ resource "aws_lambda_function" "service_lambda" {
       DB_USER     = var.db_user
       DB_PASSWORD = var.db_password
       DB_NAME     = var.db_name
+      S3_BUCKET   = var.s3_frontend_bucket_url
     }
   }
 

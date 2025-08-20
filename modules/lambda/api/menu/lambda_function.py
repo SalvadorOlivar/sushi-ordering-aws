@@ -3,18 +3,18 @@ import os
 import boto3
 import pymysql
 
-CORS_HEADERS = {
-    "Access-Control-Allow-Origin": "http://sushi-frontend-static-website-65a11ec9.s3-website-us-east-1.amazonaws.com",
-    "Access-Control-Allow-Headers": "Content-Type",
-    "Access-Control-Allow-Methods": "GET,POST,DELETE,OPTIONS"
-}
-
-# RDS settings
 port = 3306
 db_name = os.environ['DB_NAME']
 db_user_name = os.environ['DB_USER']
 db_password = os.environ['DB_PASSWORD']
 db_host = os.environ['DB_HOST']
+s3_frontend_bucket_url = os.environ['S3_FRONTEND_BUCKET_URL']
+
+CORS_HEADERS = {
+    "Access-Control-Allow-Origin": s3_frontend_bucket_url,
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Methods": "GET,POST,DELETE,OPTIONS"
+}
 
 def lambda_handler(event, context):
     try:

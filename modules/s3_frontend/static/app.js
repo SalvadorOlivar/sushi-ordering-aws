@@ -1,5 +1,5 @@
 // Cambia esta URL por la de tu API Gateway
-const API_URL = 'https://j1qupm5h22.execute-api.us-east-1.amazonaws.com/test/v1/menu';
+const API_URL = 'https://ah4rjas4d0.execute-api.us-east-1.amazonaws.com/test/v1/menu';
 
 function fetchMenu() {
   fetch(API_URL)

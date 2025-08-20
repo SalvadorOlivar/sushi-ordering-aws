@@ -1,0 +1,30 @@
+# Binarios y ejecutables
+*.exe
+*.out
+*.a
+*.so
+*.dll
+*.dylib
+
+# Archivos de build y paquetes
+*.zip
+
+# Dependencias generadas (opcional, si no usas vendor para deploy)
+vendor/
+
+# Archivos temporales y de sistema
+*.log
+.DS_Store
+Thumbs.db
+
+# Archivos de entorno
+.env
+
+# Archivos de pruebas
+*.test
+
+# No ignores estos archivos:
+!main.go
+!go.mod
+!go.sum
+!template.yaml
