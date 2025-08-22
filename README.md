@@ -20,9 +20,8 @@ This project allows users to easily and quickly place sushi orders from an inter
 
 ### Flow Diagram
 
-Frontend (S3/CloudFront) → API Gateway → SQS → Lambda → RDS
-                                              ↘
-                                               SNS (notification)
+<img width="1181" height="682" alt="sushi-serverless" src="https://github.com/user-attachments/assets/8de81a25-e4a0-422a-bd38-279e487f25dd" />
+
 
 ### Terraform
 All infrastructure is defined and deployed with Terraform, including:
