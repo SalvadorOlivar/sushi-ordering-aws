@@ -1,39 +1,40 @@
-## Proyecto: Sistema de pedidos de sushi automatizado en AWS
 
-### Descripción general
-Este proyecto permite a los usuarios realizar pedidos de sushi de forma fácil y rápida desde una página web interactiva. Los pedidos se procesan automáticamente y el restaurante recibe notificaciones instantáneas.
+## Project: Automated Sushi Ordering System on AWS
 
-### Arquitectura de la solución
+### Overview
+This project allows users to easily and quickly place sushi orders from an interactive web page. Orders are processed automatically and the restaurant receives instant notifications.
+
+### Solution Architecture
 
 **Frontend:**
-- Aplicación web interactiva (puede ser una SPA con React, Vue, o una web sencilla con HTML/JS).
-- El frontend se despliega como sitio estático en S3 y se accede mediante CloudFront (ambos tienen capa gratuita).
-- El frontend envía los pedidos a una API Gateway.
+- Interactive web application (can be a SPA with React, Vue, or a simple HTML/JS site).
+- The frontend is deployed as a static site on S3 and accessed via CloudFront (both have a free tier).
+- The frontend sends orders to an API Gateway.
 
-**Backend e integración AWS:**
-- **API Gateway:** Recibe las solicitudes de pedidos desde el frontend.
-- **SQS:** Cola para almacenar los pedidos recibidos.
-- **Lambda:** Función que se activa con los mensajes de SQS, procesa el pedido y lo guarda en RDS.
-- **RDS (MySQL/PostgreSQL):** Base de datos para almacenar los pedidos.
-- **SNS:** Notifica al restaurante (email/SMS) cuando hay un nuevo pedido.
+**Backend and AWS Integration:**
+- **API Gateway:** Receives order requests from the frontend.
+- **SQS:** Queue to store received orders.
+- **Lambda:** Function triggered by SQS messages, processes the order, and saves it in RDS.
+- **RDS (MySQL/PostgreSQL):** Database to store orders.
+- **SNS:** Notifies the restaurant (email/SMS) when there is a new order.
 
-### Diagrama de flujo
+### Flow Diagram
 
 Frontend (S3/CloudFront) → API Gateway → SQS → Lambda → RDS
                                               ↘
-                                               SNS (notificación)
+                                               SNS (notification)
 
 ### Terraform
-Toda la infraestructura se define y despliega con Terraform, incluyendo:
-- S3 y CloudFront para el frontend
+All infrastructure is defined and deployed with Terraform, including:
+- S3 and CloudFront for the frontend
 - API Gateway
 - SQS
 - Lambda
 - RDS
 - SNS
 
-### Ventajas
-- 100% capa gratuita de AWS
-- Escalable y fácil de mantener
-- Experiencia de usuario interactiva
+### Advantages
+- 100% AWS free tier
+- Scalable and easy to maintain
+- Interactive user experience
 
