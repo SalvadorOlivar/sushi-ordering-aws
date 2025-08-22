@@ -22,7 +22,8 @@ This project allows users to easily and quickly place sushi orders from an inter
 
 <img width="1181" height="682" alt="sushi-serverless" src="https://github.com/user-attachments/assets/8de81a25-e4a0-422a-bd38-279e487f25dd" />
 
-<img width="1489" height="623" alt="image" src="https://github.com/user-attachments/assets/f0934c62-4df3-4c2b-9377-7bd91b07480e" />
+<img width="1489" height="623" alt="image" src="https://github.com/user-attachments/assets/a0b423c6-4eca-4564-b273-39246dce6509" />
+
 
 ### Terraform
 All infrastructure is defined and deployed with Terraform, including:
