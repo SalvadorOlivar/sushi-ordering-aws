@@ -52,7 +52,7 @@ function createOrder(menuId) {
   // Demo: hardcoded user info, in real app get from session or form
   const order = {
     customer_name: "Salvador Olivar",
-    address: "Av Brasil 2420",
+    address: "test 1234",
     phone: "+1234567890",
     items: [menuId],
     total: 0 // You may want to fetch price or calculate in backend

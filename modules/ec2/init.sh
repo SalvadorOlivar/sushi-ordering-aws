@@ -49,4 +49,4 @@ mysql --defaults-file=~/.my.cnf sushi -e "INSERT INTO menu (dish_name, price, de
 
 # Insert 1 test user
 mysql --defaults-file=~/.my.cnf sushi -e "INSERT INTO users (username, email, full_name, phone, address) VALUES
-	('salvaolivar', 'salvaolivar@example.com', 'Salvador Olivar', '+1234567890', 'Av Brasil 2420');"
+	('salvaolivar', 'salvaolivar@example.com', 'Salvador Olivar', '+1234567890', 'Test 1234');"
