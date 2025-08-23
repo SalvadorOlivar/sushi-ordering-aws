@@ -19,12 +19,12 @@ var corsHeaders = map[string]string{
 }
 
 type Order struct {
-	ID            int64   `json:"id,omitempty"`
-	NombreCliente string  `json:"nombre_cliente"`
-	Direccion     string  `json:"direccion"`
-	Telefono      string  `json:"telefono"`
-	Items         []int64 `json:"items"`
-	Total         float64 `json:"total"`
+	ID           int64   `json:"id,omitempty"`
+	CustomerName string  `json:"customer_name"`
+	Address      string  `json:"address"`
+	Phone        string  `json:"phone"`
+	Items        []int64 `json:"items"`
+	Total        float64 `json:"total"`
 }
 
 func getDB() (*sql.DB, error) {
@@ -71,7 +71,7 @@ func handler(ctx context.Context, request events.APIGatewayProxyRequest) (events
 				Body:       `{"error": "No se pudo iniciar la transacción"}`,
 			}, nil
 		}
-		res, err := tx.Exec("INSERT INTO ordenes (nombre_cliente, direccion, telefono, total) VALUES (?, ?, ?, ?)", order.NombreCliente, order.Direccion, order.Telefono, order.Total)
+		res, err := tx.Exec("INSERT INTO orders (customer_name, address, phone, total) VALUES (?, ?, ?, ?)", order.CustomerName, order.Address, order.Phone, order.Total)
 		if err != nil {
 			tx.Rollback()
 			return events.APIGatewayProxyResponse{
@@ -90,7 +90,7 @@ func handler(ctx context.Context, request events.APIGatewayProxyRequest) (events
 			}, nil
 		}
 		for _, itemID := range order.Items {
-			_, err := tx.Exec("INSERT INTO orden_items (orden_id, menu_id) VALUES (?, ?)", ordenID, itemID)
+			_, err := tx.Exec("INSERT INTO order_items (order_id, menu_id) VALUES (?, ?)", ordenID, itemID)
 			if err != nil {
 				tx.Rollback()
 				return events.APIGatewayProxyResponse{
@@ -180,7 +180,7 @@ func handler(ctx context.Context, request events.APIGatewayProxyRequest) (events
 			}, nil
 		}
 		defer db.Close()
-		rows, err := db.Query("SELECT id, nombre_cliente, direccion, telefono, total FROM ordenes")
+		rows, err := db.Query("SELECT id, customer_name, address, phone, total FROM orders")
 		if err != nil {
 			return events.APIGatewayProxyResponse{
 				StatusCode: 500,
@@ -192,7 +192,7 @@ func handler(ctx context.Context, request events.APIGatewayProxyRequest) (events
 		var ordenes []Order
 		for rows.Next() {
 			var o Order
-			if err := rows.Scan(&o.ID, &o.NombreCliente, &o.Direccion, &o.Telefono, &o.Total); err != nil {
+			if err := rows.Scan(&o.ID, &o.CustomerName, &o.Address, &o.Phone, &o.Total); err != nil {
 				continue
 			}
 			itemRows, err := db.Query("SELECT menu_id FROM orden_items WHERE orden_id = ?", o.ID)

@@ -4,6 +4,9 @@
 .terraform/
 .terraform.lock.hcl
 
+# Zip
+*.zip
+
 # Terraform plan files
 *.tfplan
 

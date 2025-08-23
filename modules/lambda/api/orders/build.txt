@@ -1,0 +1,2 @@
+Remove-Item bootstrap -ErrorAction SilentlyContinue; $env:GOOS="linux"; $env:GOARCH="amd64"; go build -o bootstrap main.go
+Compress-Archive -Path bootstrap -DestinationPath orders.zip -Force

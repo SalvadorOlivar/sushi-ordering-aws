@@ -3,20 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sushi Ordering Frontend</title>
+  <title>Sushi Shop | Home</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
 </head>
 <body>
-  <h1>Menú Sushi</h1>
-  <div id="menu-list"></div>
-  <h2>Agregar Plato</h2>
-  <form id="add-form">
-    <input type="text" id="nombre_plato" placeholder="Nombre del plato" required>
-    <input type="number" id="precio" placeholder="Precio" step="0.01" required>
-    <input type="text" id="descripcion" placeholder="Descripción">
-    <label><input type="checkbox" id="disponible" checked> Disponible</label>
-    <button type="submit">Agregar</button>
-  </form>
-  <script src="app.js"></script>
+  <div class="container py-4">
+    <header class="shop-header mb-4">
+      <div class="d-flex flex-column align-items-center">
+        <div class="logo mb-2">
+          <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f363.png" alt="Sushi" width="48" style="vertical-align:middle;">
+          <span class="shop-title ms-2">Sushi Shop</span>
+        </div>
+        <nav class="main-nav nav justify-content-center">
+          <a class="nav-link fw-bold text-primary" href="pages/menu.html">Menu</a>
+          <a class="nav-link fw-bold text-primary" href="pages/user.html">User Info</a>
+          <a class="nav-link fw-bold text-danger" href="pages/owner.html">Owner</a>
+        </nav>
+      </div>
+    </header>
+    <main class="shop-main">
+      <section class="hero text-center">
+        <h1 class="display-4">Welcome to Sushi Shop!</h1>
+        <p class="subtitle lead">Order your favorite sushi easily and quickly.<br>Fresh, delicious, and delivered to your door.</p>
+        <a href="pages/menu.html" class="btn btn-lg btn-warning cta-btn mt-3">See Menu</a>
+      </section>
+    </main>
+    <footer class="shop-footer mt-4">
+      <p class="mb-0">&copy; 2025 Sushi Shop. All rights reserved.</p>
+    </footer>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

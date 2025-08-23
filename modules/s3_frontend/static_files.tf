@@ -1,5 +1,5 @@
 locals {
-  static_files = fileset("${path.module}/static", "*")
+  static_files = fileset("${path.module}/static", "**")
 }
 
 resource "aws_s3_object" "static_files" {

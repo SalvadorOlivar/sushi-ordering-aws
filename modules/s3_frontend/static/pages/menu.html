@@ -1,0 +1,84 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sushi Menu</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <div class="container py-4">
+    <header class="mb-4">
+      <h1 class="text-center display-5 mb-3">Sushi Menu</h1>
+      <nav class="nav justify-content-center mb-4">
+        <a class="nav-link fw-bold text-primary" href="../index.html">Home</a>
+        <a class="nav-link fw-bold text-primary" href="user.html">User Info</a>
+      </nav>
+    </header>
+    <div id="menu-list" class="row g-4 justify-content-center"></div>
+    <section class="mt-5">
+      <h2 class="h4 mb-3">Add Dish</h2>
+      <form id="add-form" class="row gy-2 gx-3 align-items-center">
+        <div class="col-md-3">
+          <input type="text" id="dish_name" class="form-control" placeholder="Dish name" required>
+        </div>
+        <div class="col-md-2">
+          <input type="number" id="price" class="form-control" placeholder="Price" step="0.01" required>
+        </div>
+        <div class="col-md-4">
+          <input type="text" id="description" class="form-control" placeholder="Description">
+        </div>
+        <div class="col-md-2">
+          <label class="form-check-label">
+            <input type="checkbox" id="available" class="form-check-input" checked> Available
+          </label>
+        </div>
+        <div class="col-md-1">
+          <button type="submit" class="btn btn-success">Add</button>
+        </div>
+      </form>
+    </section>
+  </div>
+  <script src="../menu.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sushi Shop | Menú</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container py-4">
+    <header class="shop-header mb-4">
+      <div class="d-flex flex-column align-items-center">
+        <div class="logo mb-2">
+          <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f363.png" alt="Sushi" width="48" style="vertical-align:middle;">
+          <span class="shop-title ms-2">Sushi Shop</span>
+        </div>
+        <nav class="main-nav nav justify-content-center">
+          <a class="nav-link fw-bold text-primary" href="../index.html">Inicio</a>
+          <a class="nav-link fw-bold text-primary" href="menu.html">Menú</a>
+          <a class="nav-link fw-bold text-primary" href="user.html">Usuario</a>
+          <a class="nav-link fw-bold text-danger" href="owner.html">Owner</a>
+        </nav>
+      </div>
+    </header>
+    <main class="shop-main">
+      <h1 class="text-center display-5 mb-4">Menú de Sushi</h1>
+      <div id="menu-list" class="row g-4 justify-content-center"></div>
+    </main>
+    <footer class="shop-footer mt-4">
+      <p class="mb-0">&copy; 2025 Sushi Shop. Todos los derechos reservados.</p>
+    </footer>
+  </div>
+  <script src="../menu.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

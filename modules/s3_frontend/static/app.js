@@ -1,5 +1,5 @@
 // Cambia esta URL por la de tu API Gateway
-const API_URL = 'https://ah4rjas4d0.execute-api.us-east-1.amazonaws.com/test/v1/menu';
+const API_URL = 'https://l6h6mdzou7.execute-api.us-east-1.amazonaws.com/test/v1/menu';
 
 function fetchMenu() {
   fetch(API_URL)
@@ -10,7 +10,7 @@ function fetchMenu() {
       data.forEach(item => {
         const div = document.createElement('div');
         div.className = 'menu-item';
-        div.innerHTML = `<span>${item.nombre_plato}</span> <button onclick="deleteMenu('${item.id}')">Eliminar</button>`;
+  div.innerHTML = `<span>${item.dish_name}</span> <button onclick="deleteMenu('${item.id}')">Delete</button>`;
         list.appendChild(div);
       });
     });
@@ -27,10 +27,10 @@ function deleteMenu(id) {
 document.getElementById('add-form').addEventListener('submit', function(e) {
   e.preventDefault();
   const data = {
-    nombre_plato: document.getElementById('nombre_plato').value,
-    precio: parseFloat(document.getElementById('precio').value),
-    descripcion: document.getElementById('descripcion').value,
-    disponible: document.getElementById('disponible').checked
+  dish_name: document.getElementById('dish_name').value,
+  price: parseFloat(document.getElementById('price').value),
+  description: document.getElementById('description').value,
+  available: document.getElementById('available').checked
   };
   fetch(API_URL, {
     method: 'POST',

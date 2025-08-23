@@ -36,14 +36,14 @@ def lambda_handler(event, context):
             body = event.get("body")
             if body:
                 data = json.loads(body)
-                nombre_plato = data.get("nombre_plato")
-                precio = data.get("precio")
-                descripcion = data.get("descripcion", "")
-                disponible = data.get("disponible", True)
+                dish_name = data.get("dish_name")
+                price = data.get("price")
+                description = data.get("description", "")
+                available = data.get("available", True)
                 with connection.cursor() as cursor:
                     cursor.execute(
-                        "INSERT INTO menu_sushi (nombre_plato, precio, descripcion, disponible) VALUES (%s, %s, %s, %s)",
-                        (nombre_plato, precio, descripcion, disponible)
+                        "INSERT INTO menu (dish_name, price, description, available) VALUES (%s, %s, %s, %s)",
+                        (dish_name, price, description, available)
                     )
                     connection.commit()
                 return {
@@ -65,7 +65,7 @@ def lambda_handler(event, context):
                 if menu_id is not None:
                     with connection.cursor() as cursor:
                         cursor.execute(
-                            "DELETE FROM menu_sushi WHERE id = %s",
+                            "DELETE FROM menu WHERE id = %s",
                             (menu_id,)
                         )
                         connection.commit()
@@ -88,10 +88,10 @@ def lambda_handler(event, context):
                 }
         else:
             with connection.cursor() as cursor:
-                cursor.execute('SELECT id, nombre_plato FROM menu_sushi;')
+                cursor.execute('SELECT id, dish_name FROM menu;')
                 result = cursor.fetchall()
-                # result es una lista de tuplas (id, nombre_plato)
-                items = [{"id": row[0], "nombre_plato": row[1]} for row in result]
+                # result is a list of tuples (id, dish_name)
+                items = [{"id": row[0], "dish_name": row[1]} for row in result]
             return {
                 "statusCode": 200,
                 "headers": CORS_HEADERS,

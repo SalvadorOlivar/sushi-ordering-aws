@@ -14,45 +14,21 @@ resource "aws_instance" "test_instance" {
   }
   user_data = <<-EOF
 #!/bin/bash
-    # Esperar a que la instancia tenga red
-    sleep 15
-    # Instalar mysql client
-    sudo dnf install mariadb105 -y
-    # Variables de entorno (deben ser exportadas en el entorno EC2)
-    # Crear archivo ~/.my.cnf con los datos de conexión
-    cat > ~/.my.cnf <<MYCNF
+# Esperar a que la instancia tenga red
+sleep 15
+
+# Instalar mysql client
+sudo dnf install mariadb105 -y
+
+# Crear archivo ~/.my.cnf con los datos de conexión usando variables de Terraform
+cat > ~/.my.cnf <<MYCNF
 [mysql]
-user=test_user
-password=test_password
-host=sushi.cytyicikgrsm.us-east-1.rds.amazonaws.com
+user=${var.db_username}
+password=${var.db_password}
+host=${var.db_host}
 MYCNF
-    chmod 0600 ~/.my.cnf
-    # Crear base de datos 'sushi' si no existe
-    mysql --defaults-file=~/.my.cnf -e "CREATE DATABASE IF NOT EXISTS sushi;"
-  # Crear tabla menu_sushi en la base de datos 'sushi'
-  mysql --defaults-file=~/.my.cnf sushi <<SQL
-CREATE TABLE IF NOT EXISTS menu_sushi (
-id INT AUTO_INCREMENT PRIMARY KEY,
-nombre_plato VARCHAR(100) NOT NULL,
-precio DECIMAL(10,2) NOT NULL,
-descripcion VARCHAR(255),
-disponible BOOLEAN DEFAULT TRUE
-);
-CREATE TABLE IF NOT EXISTS ordenes (
-id BIGINT AUTO_INCREMENT PRIMARY KEY,
-nombre_cliente VARCHAR(100) NOT NULL,
-direccion VARCHAR(255) NOT NULL,
-telefono VARCHAR(30) NOT NULL,
-total DECIMAL(10,2) NOT NULL,
-fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-CREATE TABLE IF NOT EXISTS orden_items (
-id BIGINT AUTO_INCREMENT PRIMARY KEY,
-orden_id BIGINT NOT NULL,
-menu_id BIGINT NOT NULL,
-FOREIGN KEY (orden_id) REFERENCES ordenes(id)
-);
-SQL
+
+chmod 0600 ~/.my.cnf
   EOF
 }
 

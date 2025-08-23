@@ -74,3 +74,7 @@ module "lambda" {
     Project     = "Sushi"
   }
 }
+
+module "sqs_queue" {
+  source = "./modules/sqs"
+}

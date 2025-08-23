@@ -18,11 +18,11 @@ resource "aws_lambda_function" "service_lambda" {
 
   environment {
     variables = {
-      DB_HOST     = var.db_host
-      DB_USER     = var.db_user
-      DB_PASSWORD = var.db_password
-      DB_NAME     = var.db_name
-      S3_BUCKET   = var.s3_frontend_bucket_url
+      DB_HOST                 = var.db_host
+      DB_USER                 = var.db_user
+      DB_PASSWORD             = var.db_password
+      DB_NAME                 = var.db_name
+      S3_FRONTEND_BUCKET_URL  = "http://${var.s3_frontend_bucket_url}"
     }
   }
 
