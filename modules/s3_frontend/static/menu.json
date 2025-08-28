@@ -1,0 +1,142 @@
+[
+    {
+        "id": 1,
+        "name": "Salmon Nigiri",
+        "description": "Fresh salmon over seasoned rice",
+        "price": 3.5,
+        "image": "assets/img/products/product-img-1.jpg"
+    },
+    {
+        "id": 2,
+        "name": "Tuna Roll",
+        "description": "Tuna and rice wrapped in seaweed",
+        "price": 4.0,
+        "image": "assets/img/products/product-img-2.jpg"
+    },
+    {
+        "id": 3,
+        "name": "Eel Avocado Roll",
+        "description": "Grilled eel and avocado with sweet sauce",
+        "price": 4.5,
+        "image": "assets/img/products/product-img-3.jpg"
+    },
+    {
+        "id": 4,
+        "name": "California Roll",
+        "description": "Crab, avocado, and cucumber",
+        "price": 3.8,
+        "image": "assets/img/products/product-img-4.jpg"
+    },
+    {
+        "id": 5,
+        "name": "Shrimp Tempura Roll",
+        "description": "Crispy shrimp tempura with rice and seaweed",
+        "price": 5.0,
+        "image": "assets/img/products/product-img-5.jpg"
+    },
+    {
+        "id": 6,
+        "name": "Spicy Tuna Roll",
+        "description": "Tuna mixed with spicy mayo and cucumber",
+        "price": 4.2,
+        "image": "assets/img/products/product-img-6.jpg"
+    },
+    {
+        "id": 7,
+        "name": "Vegetable Roll",
+        "description": "Assorted fresh vegetables wrapped in rice and seaweed",
+        "price": 3.2,
+        "image": "vegetable_roll.jpg"
+    },
+    {
+        "id": 8,
+        "name": "Yellowtail Nigiri",
+        "description": "Yellowtail fish over seasoned rice",
+        "price": 3.7,
+        "image": "yellowtail_nigiri.jpg"
+    },
+    {
+        "id": 9,
+        "name": "Octopus Nigiri",
+        "description": "Sliced octopus over seasoned rice",
+        "price": 3.9,
+        "image": "octopus_nigiri.jpg"
+    },
+    {
+        "id": 10,
+        "name": "Dragon Roll",
+        "description": "Eel, cucumber, and avocado with sweet sauce",
+        "price": 5.5,
+        "image": "dragon_roll.jpg"
+    },
+    {
+        "id": 11,
+        "name": "Rainbow Roll",
+        "description": "California roll topped with assorted fish",
+        "price": 6.0,
+        "image": "rainbow_roll.jpg"
+    },
+    {
+        "id": 12,
+        "name": "Tamago Nigiri",
+        "description": "Sweet Japanese omelette over rice",
+        "price": 2.8,
+        "image": "tamago_nigiri.jpg"
+    },
+    {
+        "id": 13,
+        "name": "Unagi Roll",
+        "description": "Grilled eel with cucumber and sweet sauce",
+        "price": 4.8,
+        "image": "unagi_roll.jpg"
+    },
+    {
+        "id": 14,
+        "name": "Philadelphia Roll",
+        "description": "Salmon, avocado, and cream cheese",
+        "price": 4.6,
+        "image": "philadelphia_roll.jpg"
+    },
+    {
+        "id": 15,
+        "name": "Cucumber Roll",
+        "description": "Fresh cucumber wrapped in rice and seaweed",
+        "price": 2.5,
+        "image": "cucumber_roll.jpg"
+    },
+    {
+        "id": 16,
+        "name": "Spicy Salmon Roll",
+        "description": "Salmon mixed with spicy mayo and cucumber",
+        "price": 4.3,
+        "image": "spicy_salmon_roll.jpg"
+    },
+    {
+        "id": 17,
+        "name": "Avocado Roll",
+        "description": "Creamy avocado wrapped in rice and seaweed",
+        "price": 2.9,
+        "image": "avocado_roll.jpg"
+    },
+    {
+        "id": 18,
+        "name": "Scallop Nigiri",
+        "description": "Fresh scallop over seasoned rice",
+        "price": 4.1,
+        "image": "scallop_nigiri.jpg"
+    },
+    {
+        "id": 19,
+        "name": "Futomaki",
+        "description": "Thick roll with assorted vegetables and egg",
+        "price": 5.2,
+        "image": "futomaki.jpg"
+    },
+    {
+        "id": 20,
+        "name": "Sashimi Platter",
+        "description": "Assorted fresh fish slices",
+        "price": 8.5,
+        "image": "sashimi_platter.jpg"
+    }
+]
