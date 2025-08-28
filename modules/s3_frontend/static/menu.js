@@ -7,8 +7,8 @@ const SUSHI_IMAGES = [
   "https://images.unsplash.com/photo-1523987355523-c7b5b0723c36?auto=format&fit=crop&w=400&q=80"
 ];
 
-const API_MENU_URL = 'https://l6h6mdzou7.execute-api.us-east-1.amazonaws.com/test/v1/menu';
-const API_ORDERS_URL = 'https://l6h6mdzou7.execute-api.us-east-1.amazonaws.com/test/v1/orders';
+const API_MENU_URL = 'https://yrajve30cf.execute-api.us-east-1.amazonaws.com/test/v1/menu';
+const API_ORDERS_URL = 'https://yrajve30cf.execute-api.us-east-1.amazonaws.com/test/v1/orders';
 
 function fetchMenu() {
   fetch(API_MENU_URL)

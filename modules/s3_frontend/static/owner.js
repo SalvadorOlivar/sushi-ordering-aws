@@ -1,4 +1,4 @@
-const API_MENU_URL = 'https://l6h6mdzou7.execute-api.us-east-1.amazonaws.com/test/v1/menu';
+const API_MENU_URL = 'https://yrajve30cf.execute-api.us-east-1.amazonaws.com/test/v1/menu';
 
 function fetchOwnerMenu() {
   fetch(API_MENU_URL)
