@@ -19,24 +19,24 @@ function renderMenuPage(page) {
     const start = (page - 1) * itemsPerPage;
     const end = start + itemsPerPage;
     const pageMenus = allMenus.slice(start, end);
-    pageMenus.forEach(item => {
-        container.innerHTML += `
-            <div class="col-lg-4 col-md-6 text-center">
-                <div class="single-product-item">
-                    <div class="product-image">
-                        <a href="single-product.html?id=${item.id}">
-                            <img src="${item.image}" alt="">
-                        </a>
-                    </div>
-                    <h3>${item.name}</h3>
-                    <p class="product-price"><span>Porción</span> ${item.price}$ </p>
-                    <a href="cart.html" class="cart-btn">
-                        <i class="fas fa-shopping-cart"></i> Agregar al carrito
-                    </a>
-                </div>
-            </div>
-        `;
-    });
+  pageMenus.forEach(item => {
+    container.innerHTML += `
+      <div class="col-lg-4 col-md-6 text-center">
+        <div class="single-product-item">
+          <div class="product-image">
+            <a href="single-product.html?id=${item.id}">
+              <img src="${item.image}" alt="">
+            </a>
+          </div>
+          <h3>${item.name}</h3>
+          <p class="product-price"><span>Porción</span> ${item.price}$ </p>
+          <a href="#" class="cart-btn" data-id="${item.id}">
+            <i class="fas fa-shopping-cart"></i> Agregar al carrito
+          </a>
+        </div>
+      </div>
+    `;
+  });
 }
 
 function renderPagination() {
@@ -70,3 +70,34 @@ function renderPagination() {
         });
     });
 }
+
+function addToCart(product) {
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  // Buscar si ya existe el producto
+  const found = cart.find(item => item.id === product.id);
+  if (found) {
+    found.cantidad += 1;
+  } else {
+    cart.push({ ...product, cantidad: 1 });
+  }
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+// Delegación de eventos para botones "Agregar al carrito"
+document.addEventListener('click', function(e) {
+  if (e.target.closest('.cart-btn')) {
+    e.preventDefault();
+    const btn = e.target.closest('.cart-btn');
+    const id = parseInt(btn.getAttribute('data-id'));
+    const product = allMenus.find(item => item.id === id);
+    if (product) {
+      addToCart({
+        id: product.id,
+        nombre: product.name,
+        precio: product.price,
+        img: product.image
+      });
+      alert('Producto agregado al carrito');
+    }
+  }
+});
